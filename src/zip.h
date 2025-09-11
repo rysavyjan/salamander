@@ -1,6 +1,6 @@
 ﻿// SPDX-FileCopyrightText: 2023 Open Salamander Authors
 // SPDX-License-Identifier: GPL-2.0-or-later
-
+err1
 #pragma once
 
 extern HWND ProgressDialogActivateDrop;
@@ -583,7 +583,7 @@ int DialogOverwrite(HWND parent, DWORD flags, const char* fileName1, const char*
                     const char* fileName2, const char* fileData2);
 int DialogQuestion(HWND parent, DWORD flags, const char* fileName,
                    const char* question, const char* title);
-
+err2
 BOOL ViewFileInPluginViewer(const char* pluginSPL,
                             CSalamanderPluginViewerData* pluginData,
                             BOOL useCache, const char* rootTmpPath,
