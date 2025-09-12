@@ -136,7 +136,7 @@
 //
 // When increasing configuration version, add one to THIS_CONFIG_VERSION
 //
-// When switching to a new program version, THIS_CONFIG_VERSION must be incremented by 1
+// When upgrading to a new program version, THIS_CONFIG_VERSION must be incremented by 1
 // so that new plug-ins are auto-installed and the plugins.ver counter resets.
 //
 
@@ -780,19 +780,21 @@ const char* SALAMANDER_PWDMNGR_REG = "Password Manager";
 // GetUpgradeInfo
 //
 // Tries to find "AutoImportConfig" in the configuration key of this version of Salamander.
-// If it is not found or if the key stored in AutoImportConfig does not exist (points to the key of this version, which makes no sense)
+// If it is not found or if the key stored in AutoImportConfig does not exist 
+// (points to the key of this version, which makes no sense)
 // or if it contains a corrupted (incomplete save) or empty configuration, it returns
 // FALSE in 'autoImportConfig'. Otherwise it returns TRUE in 'autoImportConfig' and
 // in 'autoImportConfigFromKey' returns the path of the key from which to import the configuration.
 // Handles the case when AutoImportConfig points to a key that itself contains AutoImportConfig
 // for another key. We simply follow the "target" key and leave intermediate keys untouched-
-// if the import succeeds, the target key will be removed anyway. Returns FALSE only if
-// the application should exit.
+// if the import succeeds, the target key will be removed anyway. Returns FALSE only if the application should exit.
 //
-// If the configuration key of this version contains, besides AutoImportConfig, also the "Configuration" key (expected to be a saved configuration),
+// If the configuration key of this version contains, besides AutoImportConfig, also the "Configuration" 
+// key (expected to be a saved configuration),
 // we ask the user whether to:
-//   - Use the current configuration and ignore the old one (we do not delete it so the user does not lose data, and it does not require that much space anyway). In this case
-//     delete AutoImportConfig immediately. This is done silently, if AutoImportConfig points to this version of Salamander`s key
+//   - Use the current configuration and ignore the old one (we do not delete it so the user does not lose data, 
+//     and it does not require that much space anyway). In this case delete AutoImportConfig immediately.
+//     This is done silently, if AutoImportConfig points to this version of Salamander`s key
 //     (DEFAULT OFFER because it does not cause data loss and users may dismiss the message box without reading).
 //   - Delete the current configuration and import the old version. In this case remove everything except AutoImportConfig.
 //   - Exit the application - simply return FALSE.
@@ -1009,10 +1011,8 @@ BOOL GetNumFromStr(const char* s, DWORD* retNum)
 
 void CheckShutdownParams()
 {
-    // HKEY_CURRENT_USER\Control Panel\Desktop\WaitToKillAppTimeout=20000,REG_SZ
-    //   ... warn if less than 20000
-    // HKEY_CURRENT_USER\Control Panel\Desktop\AutoEndTasks=0,REG_SZ
-    //   ... warn if not 0
+    // HKEY_CURRENT_USER\Control Panel\Desktop\WaitToKillAppTimeout=20000,REG_SZ ... warn if less than 20000
+    // HKEY_CURRENT_USER\Control Panel\Desktop\AutoEndTasks=0,REG_SZ ... warn if not 0
     // W2K and XP have it; I could not find it on Vista but supposedly it is there (info from the internet)
 
     BOOL showWarning = FALSE;
