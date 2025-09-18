@@ -909,7 +909,7 @@ BOOL CMainWindow::InsertMenuBand()
     else
     {
         rbbi.fStyle |= RBBS_NOGRIPPER;
-        // so we are not glued to the edge
+        // so we are not close to the edge
         rbbi.fMask |= RBBIM_HEADERSIZE;
         rbbi.cxHeader = 2;
     }
@@ -979,7 +979,7 @@ BOOL CMainWindow::InsertTopToolbarBand()
     else
     {
         rbbi.fStyle |= RBBS_NOGRIPPER;
-        // so we are not glued to the edge
+        // so we are not close to the edge
         rbbi.fMask |= RBBIM_HEADERSIZE;
         rbbi.cxHeader = 2;
     }
@@ -1015,7 +1015,7 @@ BOOL CMainWindow::InsertPluginsBarBand()
     else
     {
         rbbi.fStyle |= RBBS_NOGRIPPER;
-        // so we are not glued to the edge
+        // so we are not close to the edge
         rbbi.fMask |= RBBIM_HEADERSIZE;
         rbbi.cxHeader = 2;
     }
@@ -1051,7 +1051,7 @@ BOOL CMainWindow::InsertUMToolbarBand()
     else
     {
         rbbi.fStyle |= RBBS_NOGRIPPER;
-        // so we are not glued to the edge
+        // so we are not close to the edge
         rbbi.fMask |= RBBIM_HEADERSIZE;
         rbbi.cxHeader = 2;
     }
@@ -1088,7 +1088,7 @@ BOOL CMainWindow::InsertHPToolbarBand()
     else
     {
         rbbi.fStyle |= RBBS_NOGRIPPER;
-        // so we are not glued to the edge
+        // so we are not close to the edge
         rbbi.fMask |= RBBIM_HEADERSIZE;
         rbbi.cxHeader = 2;
     }
@@ -1749,7 +1749,7 @@ void CMainWindow::GetFormatedPathForTitle(char* path)
                         int pathLen = (int)strlen(path);
                         // if FS does not support FS_SERVICE_GETNEXTDIRLINEHOTPATH, we get FALSE and show the full path
                         if (panel->GetPluginFS()->GetNextDirectoryLineHotPath(path, pathLen, chars) &&
-                            chars < pathLen) // end of path isn't a separator; bug in GetNextDirectoryLineHotPath implementation
+                            chars < pathLen) // end of path isn't a point of division; bug in GetNextDirectoryLineHotPath implementation
                         {
                             // we isolated the root
                             trimStart = path + chars;
@@ -1760,7 +1760,7 @@ void CMainWindow::GetFormatedPathForTitle(char* path)
                                 if (chars < pathLen)
                                     lastChars = chars;
                                 else
-                                    break; // end of path isn't a separator;bug in GetNextDirectoryLineHotPath implementation
+                                    break; // end of path isn't a point of division;bug in GetNextDirectoryLineHotPath implementation
                             }
                             trimEnd = path + lastChars;
                         }
@@ -1813,7 +1813,7 @@ void CMainWindow::GetFormatedPathForTitle(char* path)
                             if (chars < pathLen)
                                 lastChars = chars;
                             else
-                                break; // end of path isn't a separator; bug in GetNextDirectoryLineHotPath implementation
+                                break; // end of path isn't a point of division; bug in GetNextDirectoryLineHotPath implementation
                         }
                         if (lastChars > 0)
                         {
@@ -1986,7 +1986,7 @@ CMainWindow::HitTest(int xPos, int yPos) // screen coordinates
         RBHITTESTINFO hti;
         hti.pt = p;
         if (SendMessage(HTopRebar, RB_HITTEST, 0, (LPARAM)&hti) == -1 ||
-            hti.flags == RBHT_NOWHERE || hti.iBand == -1) // lightly tested, but trust the Salamander authors...
+            hti.flags == RBHT_NOWHERE || hti.iBand == -1) // perhaps too many tests, but we want to be sure...
         {
             hit = mwhteTopRebar;
         }
@@ -2429,7 +2429,7 @@ MENU_TEMPLATE_ITEM InfoLineMenu[] =
         menu.InsertItem(0xffffffff, TRUE, &mii);
     }
 
-    // pop up the menu
+    // open the menu
     int cmd = menu.Track(MENU_TRACK_RETURNCMD | MENU_TRACK_RIGHTBUTTON,
                          xPos, yPos, HWindow, NULL);
     if (cmd == 0)
